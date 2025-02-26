@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vuyolwethu Sibisi - Software Developer</title>
+  <style>
+    /* General Styles */
+    :root {
+      --bg-color: #f0f4f8; /* Light mode background */
+      --text-color: #333; /* Light mode text */
+      --accent-color: #007BFF; /* Blue */
+      --card-bg: white; /* Light mode card background */
+      --nav-bg: rgba(0, 123, 255, 0.9); /* Light mode nav background */
+      --footer-bg: #007BFF; /* Light mode footer background */
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #1a1a1a; /* Dark mode background */
+      --text-color: #f0f4f8; /* Dark mode text */
+      --accent-color: #ff9f43; /* Orange accent */
+      --card-bg: #333; /* Dark mode card background */
+      --nav-bg: rgba(26, 26, 26, 0.9); /* Dark mode nav background */
+      --footer-bg: #333; /* Dark mode footer background */
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--accent-color);
+    }
+
+    a:hover {
+      color: #0056b3; /* Darker blue in light mode */
+    }
+
+    /* Dark mode link hover */
+    [data-theme="dark"] a:hover {
+      color: #ff7f00; /* Darker orange in dark mode */
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      margin: 0;
+      padding: 1rem 0;
+    }
+
+    nav ul li {
+      margin: 0 1.5rem;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff9f43; /* Orange accent */
+    }
+
+    /* Dark Mode Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1001;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      background: #0056b3; /* Darker blue in light mode */
+      transform: scale(1.1);
+    }
+
+    [data-theme="dark"] .theme-toggle:hover {
+      background: #ff7f00; /* Darker orange in dark mode */
+    }
+
+    /* Header */
+    header {
+      background: var(--accent-color);
+      color: white;
+      padding: 6rem 0 4rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .cta-buttons {
+      margin-top: 1rem;
+    }
+
+    .cta-buttons a {
+      background: white;
+      color: var(--accent-color);
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      margin: 0 0.5rem;
+      font-weight: bold;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .cta-buttons a:hover {
+      background: var(--bg-color);
+      transform: scale(1.1);
+    }
+
+    /* 3D Floating Shapes */
+    .shape {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape1 {
+      width: 100px;
+      height: 100px;
+      top: 10%;
+      left: 5%;
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+
+    .shape2 {
+      width: 150px;
+      height: 150px;
+      top: 20%;
+      right: 10%;
+      border-radius: 30%;
+      animation-delay: 2s;
+    }
+
+    .shape3 {
+      width: 80px;
+      height: 80px;
+      bottom: 15%;
+      left: 20%;
+      border-radius: 40%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* Sections */
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border-radius: 15px;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent-color);
+      text-transform: uppercase;
+    }
+
+    /* About Me */
+    .about-me {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .about-me img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent-color);
+      animation: rotate 10s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      overflow: hidden;
+    }
+
+    .skill {
+      background: var(--bg-color);
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .skill:hover {
+      background: var(--card-bg);
+      transform: scale(1.1);
+    }
+
+    /* Moving Skills Animation */
+    .skills-grid .skill:nth-child(1),
+    .skills-grid .skill:nth-child(2),
+    .skills-grid .skill:nth-child(3),
+    .skills-grid .skill:nth-child(4),
+    .skills-grid .skill:nth-child(5) {
+      animation: moveLeft 10s linear infinite;
+    }
+
+    .skills-grid .skill:nth-child(6),
+    .skills-grid .skill:nth-child(7),
+    .skills-grid .skill:nth-child(8),
+    .skills-grid .skill:nth-child(9),
+    .skills-grid .skill:nth-child(10) {
+      animation: moveRight 10s linear infinite;
+    }
+
+    @keyframes moveLeft {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-100%); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes moveRight {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Projects */
+    .project-card {
+      background: var(--bg-color);
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .project-card:hover {
+      background: var(--card-bg);
+      transform: scale(1.05);
+    }
+
+    .project-card h3 {
+      margin: 0;
+      color: var(--accent-color);
+    }
+
+    .project-links {
+      margin-top: 1rem;
+    }
+
+    .project-links a {
+      background: var(--accent-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      margin-right: 0.5rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .project-links a:hover {
+      background: #0056b3; /* Darker blue in light mode */
+      transform: scale(1.1);
+    }
+
+    [data-theme="dark"] .project-links a:hover {
+      background: #ff7f00; /* Darker orange in dark mode */
+    }
+
+    /* Contact */
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    #contact-form input, #contact-form textarea {
+      padding: 0.75rem;
+      border: 2px solid var(--accent-color);
+      border-radius: 15px;
+      background: var(--card-bg);
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+
+    #contact-form button {
+      background: var(--accent-color);
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    #contact-form button:hover {
+      background: #0056b3; /* Darker blue in light mode */
+      transform: scale(1.1);
+    }
+
+    [data-theme="dark"] #contact-form button:hover {
+      background: #ff7f00; /* Darker orange in dark mode */
+    }
+
+    /* Footer */
+    footer {
+      background: var(--footer-bg);
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 4rem;
+      transition: background 0.3s ease;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Dark Mode Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle">🌙 Dark Mode</button>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+    <h1>Hi, I'm Vuyolwethu Sibisi</h1>
+    <p>Aspiring <span id="dynamic-title">Software Developer</span></p>
+    <div class="cta-buttons">
+      <a href="#projects">View My Work</a>
+      <a href="[Link to Your Resume PDF]" download>Download My Resume</a>
+    </div>
+  </header>
+
+  <!-- About Me -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-me">
+      <img src="[Your Photo URL]" alt="Vuyolwethu Sibisi">
+      <div>
+        <p>I’m a recent postgraduate from the University of KwaZulu-Natal (UKZN) with a passion for software development. My academic background in Computer Science has equipped me with a strong foundation in programming, problem-solving, and teamwork. I’m eager to apply my skills in a real-world environment and contribute to innovative projects.</p>
+        <p>When I’m not coding, I enjoy hiking, gaming, and exploring new technologies.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">Python</div>
+      <div class="skill">Java</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">HTML/CSS</div>
+      <div class="skill">React</div>
+      <div class="skill">Git</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Problem-Solving</div>
+      <div class="skill">C#</div>
+      <div class="skill">C++</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>E-Commerce Website</h3>
+      <p>A fully functional e-commerce website built with React and Node.js. Features include user authentication, product search, and a shopping cart.</p>
+      <div class="project-links">
+        <a href="[GitHub Link]" target="_blank">View Code</a>
+        <a href="[Live Demo Link]" target="_blank">Live Demo</a>
+      </div>
+    </div>
+    <div class="project-card">
+      <h3>Task Management App</h3>
+      <p>A task management app with drag-and-drop functionality, built using JavaScript and Firebase.</p>
+      <div class="project-links">
+        <a href="[GitHub Link]" target="_blank">View Code</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <form id="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2023 Vuyolwethu Sibisi. All rights reserved.</p>
+  </footer>
+
+  <!-- Typing Effect Script -->
+  <script>
+    const titles = ["Software Developer", "Software Engineer", "UI/UX Designer"];
+    let index = 0;
+    let charIndex = 0;
+    const speed = 150; // Typing speed in milliseconds
+    const element = document.getElementById("dynamic-title");
+
+    function type() {
+      if (charIndex < titles[index].length) {
+        element.textContent += titles[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, speed);
+      } else {
+        setTimeout(erase, 2000); // Wait before erasing
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        element.textContent = titles[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, speed / 2);
+      } else {
+        index = (index + 1) % titles.length; // Move to the next title
+        setTimeout(type, 500); // Wait before typing the next title
+      }
+    }
+
+    // Start the typing effect
+    type();
+  </script>
+
+  <!-- Dark Mode Toggle Script -->
+  <script>
+    const themeToggle = document.getElementById("theme-toggle");
+    const body = document.body;
+
+    // Check for saved theme in localStorage
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      body.setAttribute("data-theme", savedTheme);
+      themeToggle.textContent = savedTheme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+    }
+
+    // Toggle theme
+    themeToggle.addEventListener("click", () => {
+      if (body.getAttribute("data-theme") === "dark") {
+        body.setAttribute("data-theme", "light");
+        themeToggle.textContent = "🌙 Dark Mode";
+        localStorage.setItem("theme", "light");
+      } else {
+        body.setAttribute("data-theme", "dark");
+        themeToggle.textContent = "☀️ Light Mode";
+        localStorage.setItem("theme", "dark");
+      }
+    });
+  </script>
+</body>
+</html>
