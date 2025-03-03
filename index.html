@@ -416,12 +416,12 @@
       <div class="skill">Java</div>
       <div class="skill">JavaScript</div>
       <div class="skill">HTML/CSS</div>
-      <div class="skill">React</div>
-      <div class="skill">Git</div>
-      <div class="skill">SQL</div>
-      <div class="skill">Problem-Solving</div>
       <div class="skill">C#</div>
       <div class="skill">C++</div>
+      <div class="skill">SQL</div>
+      <div class="skill">Problem-Solving</div>
+      <div class="skill">Excel</div>
+      <div class="skill">Git</div>
     </div>
   </section>
 
@@ -429,8 +429,8 @@
   <section id="projects">
     <h2>Projects</h2>
     <div class="project-card">
-      <h3>E-Commerce Website</h3>
-      <p>A fully functional e-commerce website built with React and Node.js. Features include user authentication, product search, and a shopping cart.</p>
+      <h3>Booking Website</h3>
+      <p>A group project where we developed a booking system for Samnath Optometrists. The system allows patients to book appointments online and manage their schedules efficiently..</p>
       <div class="project-links">
         <a href="[GitHub Link]" target="_blank">View Code</a>
         <a href="[Live Demo Link]" target="_blank">Live Demo</a>
@@ -461,12 +461,12 @@
     <p>© 2023 Vuyolwethu Sibisi. All rights reserved.</p>
   </footer>
 
-  <!-- Typing Effect Script -->
+  
   <script>
     const titles = ["Software Developer", "Software Engineer", "UI/UX Designer"];
     let index = 0;
     let charIndex = 0;
-    const speed = 150; // Typing speed in milliseconds
+    const speed = 150;  
     const element = document.getElementById("dynamic-title");
 
     function type() {
@@ -475,7 +475,7 @@
         charIndex++;
         setTimeout(type, speed);
       } else {
-        setTimeout(erase, 2000); // Wait before erasing
+        setTimeout(erase, 2000); 
       }
     }
 
@@ -485,7 +485,7 @@
         charIndex--;
         setTimeout(erase, speed / 2);
       } else {
-        index = (index + 1) % titles.length; // Move to the next title
+        index = (index + 1) % titles.length;  
         setTimeout(type, 500); // Wait before typing the next title
       }
     }
