@@ -449,11 +449,12 @@
   <section id="contact">
     <h2>Contact</h2>
     <form id="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
       <button type="submit">Send Message</button>
     </form>
+    <p id="response-message" style="display: none; color: green; margin-top: 1rem;"></p>
   </section>
 
   <!-- Footer -->
@@ -461,40 +462,47 @@
     <p>© 2023 Vuyolwethu Sibisi. All rights reserved.</p>
   </footer>
 
-  
+  <!-- JavaScript for Form Submission -->
   <script>
-    const titles = ["Software Developer", "Software Engineer", "UI/UX Designer"];
-    let index = 0;
-    let charIndex = 0;
-    const speed = 150;  
-    const element = document.getElementById("dynamic-title");
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
 
-    function type() {
-      if (charIndex < titles[index].length) {
-        element.textContent += titles[index].charAt(charIndex);
-        charIndex++;
-        setTimeout(type, speed);
-      } else {
-        setTimeout(erase, 2000); 
-      }
-    }
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
 
-    function erase() {
-      if (charIndex > 0) {
-        element.textContent = titles[index].substring(0, charIndex - 1);
-        charIndex--;
-        setTimeout(erase, speed / 2);
-      } else {
-        index = (index + 1) % titles.length;  
-        setTimeout(type, 500); // Wait before typing the next title
-      }
-    }
+      fetch('http://localhost:3000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const responseMessage = document.getElementById('response-message');
+        responseMessage.textContent = data.message;
+        responseMessage.style.display = 'block';
 
-    // Start the typing effect
-    type();
+        // Clear the form after successful submission
+        document.getElementById('contact-form').reset();
+
+        // Hide the message after 5 seconds
+        setTimeout(() => {
+          responseMessage.style.display = 'none';
+        }, 5000);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        const responseMessage = document.getElementById('response-message');
+        responseMessage.textContent = 'Error sending message. Please try again.';
+        responseMessage.style.color = 'red';
+        responseMessage.style.display = 'block';
+      });
+    });
   </script>
 
-  <!-- Dark Mode Toggle Script -->
+  <!-- JavaScript for Dark Mode Toggle -->
   <script>
     const themeToggle = document.getElementById("theme-toggle");
     const body = document.body;
@@ -518,6 +526,39 @@
         localStorage.setItem("theme", "dark");
       }
     });
+  </script>
+
+  <!-- JavaScript for Dynamic Title -->
+  <script>
+    const titles = ["Software Developer", "Software Engineer", "UI/UX Designer"];
+    let index = 0;
+    let charIndex = 0;
+    const speed = 150;
+    const element = document.getElementById("dynamic-title");
+
+    function type() {
+      if (charIndex < titles[index].length) {
+        element.textContent += titles[index].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, speed);
+      } else {
+        setTimeout(erase, 2000);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        element.textContent = titles[index].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, speed / 2);
+      } else {
+        index = (index + 1) % titles.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    // Start the typing effect
+    type();
   </script>
 </body>
 </html>
